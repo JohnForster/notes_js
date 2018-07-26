@@ -3,19 +3,18 @@
     let noteList = new NoteListModel();
     noteList.add('This is a test note.');
     let view = new NoteListView(noteList);
-    let expectedHtml = '<li><div>Note 1: This is a test note.</div></li>';
-    if(view.html() !== expectedHtml){
+    if(!view.html().includes('Note 1: This is a test note.')){
       throw new Error('HTML not what was expected (single).');
     }
   }
 
   function testHtmlListsMultipleNotes(){
     let noteList = new NoteListModel();
-    noteList.add('This is a test note.');
-    noteList.add('This is another note');
+    let noteText1 = 'This is a test note.', noteText2 = 'This is another note';
+    noteList.add(noteText1);
+    noteList.add(noteText2);
     let view = new NoteListView(noteList);
-    let expectedHtml = '<li><div>Note 1: This is a test note.</div></li><li><div>Note 2: This is another note</div></li>'
-    if(view.html() !== expectedHtml){
+    if(!view.html().includes(noteText1) || !view.html().includes(noteText2)){
       throw new Error('HTML not what was expected (multiple).');
     }
   }
@@ -33,13 +32,22 @@
     let noteList = new NoteListModel();
     noteList.add('12345678901234567890abc');
     let view = new NoteListView(noteList);
-    console.log(view.html());
-    let expectedHtml = '<li><div>Note 1: 12345678901234567890...</div></li>';
-    if(view.html() !== expectedHtml){
+    let expectedHtml = 'Note 1: 12345678901234567890...';
+    if(!view.html().includes(expectedHtml)){
       throw new Error('HTML not what was expected (twenty chars).');
     }
   }
 
+  function testChangeUrlByID(){
+    let noteList = new NoteListModel();
+    noteList.add('12345678901234567890abc');
+    let view = new NoteListView(noteList);
+    if(!view.html().includes('href=#notes/0')){
+      throw new Error(`Expected ${window.location.href} to equal ${url + '#notes/0'}`)
+    }
+  }
+
+  testChangeUrlByID();
   testHtmlDoesntListEmptyNote();
   testHtmlListsSingleNote();
   testHtmlListsMultipleNotes();

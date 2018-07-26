@@ -11,12 +11,11 @@
 
   NoteListView.prototype.html = function(){
     let output = '';
-
     this._noteList.all().forEach(function(note, index){
       let firstTwentyCharsOfNote = firstTwentyChars(note.text());
-      output += `<li><div>Note ${index + 1}: ${firstTwentyCharsOfNote}</div></li>`
+      output += `<li><a id='link-${note.id()}' href=#notes/${note.id()}>`
+          + `<div>Note ${index + 1}: ${firstTwentyCharsOfNote}</div></a></li>`
     });
-
     return output
   };
 
