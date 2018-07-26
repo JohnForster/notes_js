@@ -3,11 +3,18 @@
     this._noteList = noteList || [];
   }
 
+  let firstTwentyChars = function(note){
+    let lineEnding = '';
+    if (note.length > 20) { lineEnding = '...' }
+    return note.substring(0,20) + lineEnding;
+  };
+
   NoteListView.prototype.html = function(){
     let output = '';
 
     this._noteList.all().forEach(function(note, index){
-      output += `<li><div>Note ${index + 1}: ${note.noteText()}</div></li>`
+      let firstTwentyCharsOfNote = firstTwentyChars(note.text());
+      output += `<li><div>Note ${index + 1}: ${firstTwentyCharsOfNote}</div></li>`
     });
 
     return output

@@ -1,15 +1,15 @@
 (function(exports){
-  var appDiv = document.getElementById('app');
+  let appDiv = document.getElementById('app');
   appDiv.innerHTML = 'howdy';
 
   function NoteController(noteList){
-    _noteList = noteList;
-    _noteList.add('Favourite drink: seltzer');
-    _noteListView = new NoteListView(_noteList);
+    this._noteList = noteList;
+    this._noteList.add('Favourite drink: seltzer');
+    this._noteListView = new NoteListView(this._noteList);
   }
 
   NoteController.prototype.changeApp = function(){
-    let noteListHTML = _noteListView.html();
+    let noteListHTML = this._noteListView.html();
     appDiv = document.getElementById('app');
     appDiv.innerHTML = noteListHTML;
   };
