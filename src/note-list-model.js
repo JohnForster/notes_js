@@ -3,13 +3,13 @@
     this.noteList = [];
   }
 
-  NoteListModel.prototype.add = function(note){
-    this.noteList.push(note);
-  }
+  NoteListModel.prototype.add = function(noteText){
+    this.noteList.push(new NoteModel(noteText));
+  };
 
   NoteListModel.prototype.all = function(){
     return this.noteList;
-  }
+  };
 
   exports.NoteListModel = NoteListModel;
 })(this);

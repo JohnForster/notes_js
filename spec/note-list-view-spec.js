@@ -1,8 +1,7 @@
 (function(exports){
   function testHtmlListsSingleNote(){
-    let note1 = new NoteModel('This is a test note.');
     let noteList = new NoteListModel();
-    noteList.add(note1);
+    noteList.add('This is a test note.');
     let view = new NoteListView(noteList);
     let expectedHtml = '<li><div>Note 1: This is a test note.</div></li>';
     if(view.html() !== expectedHtml){
@@ -11,11 +10,9 @@
   }
 
   function testHtmlListsMultipleNotes(){
-    let note1 = new NoteModel('This is a test note.');
-    let note2 = new NoteModel('This is a test note 2');
     let noteList = new NoteListModel();
-    noteList.add(note1);
-    noteList.add(note2);
+    noteList.add('This is a test note.');
+    noteList.add('This is a test note 2');
     let view = new NoteListView(noteList);
     let expectedHtml = '<li><div>Note 1: This is a test note.</div></li><li><div>Note 2: This is a test note 2</div></li>'
     if(view.html() !== expectedHtml){
